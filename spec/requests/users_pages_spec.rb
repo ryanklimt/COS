@@ -7,7 +7,7 @@ describe "UsersPages" do
       fill_in 'Username', with: 'user@example.com'
       fill_in 'Password', with: 'password'
       fill_in 'Confirmation', with: 'password'
-      click_button 'Submit'
+      click_button 'Create new account'
     end
   end
 end
