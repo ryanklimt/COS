@@ -1,20 +1,16 @@
 require 'spec_helper'
 
 describe User do
-<<<<<<< HEAD
-=======
   let(:user) { FactoryGirl.create(:user) }
   subject { user }
-
->>>>>>> COS243
+  
   it { should respond_to(:username) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
 
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
-<<<<<<< HEAD
-=======
+
   it { should respond_to(:authenticate) }
 
   it { should be_valid }
@@ -104,5 +100,4 @@ describe User do
       specify { expect(authenticated_user).to be_false }
     end
   end
->>>>>>> COS243
 end
