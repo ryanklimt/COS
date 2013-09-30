@@ -1,13 +1,6 @@
-<h1>Update your profile</h1>
-    
-<%= form_for(@user) do |f| %>
-  <%= f.label :username, 'Enter Username' %>
-  <%= f.text_field :username %><br>
-  <%= f.label :email, 'Enter Email' %>
-  <%= f.text_field :email %><br>
-  <%= f.label :password, 'Enter Password' %>
-  <%= f.password_field :password %><br>
-  <%= f.label :password_confirmation, 'Enter Confirmation' %>
-  <%= f.password_field :password_confirmation %><br>
-  <%= f.submit "Update account" %>
+<h1>Edit user information</h1>
+
+<%= form_for @user do |form| %>  
+  <%= render 'user_fields', f: form %>
+  <%= form.submit 'Update account' %>
 <% end %>
