@@ -1,7 +1,5 @@
 <h1>List of users</h1>
 <h2><%= @users.load.size %> users</h2>
 <ul>
-  <% @users.each do |user| %>
-  <li><%= render user %></li>
-  <% end %>
+  <%= render @users %>
 </ul>
