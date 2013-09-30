@@ -1,6 +1,6 @@
-<h1>Sign Up!</h1>
-
-<%= form_for @user do |f| %>
+<h1>Update your profile</h1>
+    
+<%= form_for(@user) do |f| %>
   <%= f.label :username, 'Enter Username' %>
   <%= f.text_field :username %><br>
   <%= f.label :email, 'Enter Email' %>
@@ -9,5 +9,5 @@
   <%= f.password_field :password %><br>
   <%= f.label :password_confirmation, 'Enter Confirmation' %>
   <%= f.password_field :password_confirmation %><br>
-  <%= f.submit 'Create new account' %>
+  <%= f.submit "Update account" %>
 <% end %>
