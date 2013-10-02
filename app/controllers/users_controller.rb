@@ -1,31 +1,43 @@
 class UsersController < ApplicationController
+
   def index
     @users = User.all
-  end  
+  end
+
   def new
     @user = User.new
   end
+
   def create
-    permitted_params = params.require(:user).permit(:username, :email, :password, :password_confirmation)
-    @user = User.new(permitted_params)
-    if(@user.save)
+    @user = User.new(acceptable_params)
+    if @user.save then
       redirect_to @user
     else
-      render 'show'
+      render 'new'
     end
   end
+
   def show
     @user = User.find(params[:id])
   end
+
   def edit
     @user = User.find(params[:id])
   end
+
   def update
     @user = User.find(params[:id])
-    if(@user.update_attributes(:username => params[:user][:username], :email => params[:user][:email]))
+    if @user.update(acceptable_params) then
       redirect_to @user
     else
       render 'edit'
     end
   end
+
+  private
+
+    def acceptable_params
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    end
+
 end
