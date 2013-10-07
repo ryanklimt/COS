@@ -6,8 +6,6 @@ gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-gem 'bcrypt-ruby', '~> 3.0.0'
-
 group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
@@ -17,8 +15,11 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+gem 'bcrypt-ruby', '~> 3.0.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
