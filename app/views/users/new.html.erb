@@ -1,6 +1,15 @@
 <h1>Sign Up!</h1>
 
-<%= form_for @user do |form| %>  
+<%= form_for @user do |form| %>
+  <% if @user.errors.any? %>
+    <p>There are <%= @user.errors.count %> errors.</p>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <%= render 'user_fields', f: form %>
-  <%= form.submit 'Create new account' %>
+  <%= form.submit 'Create new user' %>
 <% end %>
