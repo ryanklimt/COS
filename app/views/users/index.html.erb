@@ -1,5 +1,5 @@
 <h1>List of users</h1>
-<h2><%= @users.load.size %> users</h2>
+<h2><%= pluralize(@users.load.size, 'user') %></h2>
 <ul>
   <%= render @users %>
 </ul>
