@@ -1,8 +1,19 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <p>You have <%= pluralize(@user.errors.count, 'error') %>.</p>
+  </div>
+  <ul class="text-danger">
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= f.label :username, 'Enter Username' %>
-<%= f.text_field :username %><br>
+<%= f.text_field :username, class: 'form-control' %><br>
 <%= f.label :email, 'Enter Email' %>
-<%= f.text_field :email %><br>
+<%= f.text_field :email, class: 'form-control' %><br>
 <%= f.label :password, 'Enter Password' %>
-<%= f.password_field :password %><br>
+<%= f.password_field :password, class: 'form-control' %><br>
 <%= f.label :password_confirmation, 'Enter Confirmation' %>
-<%= f.password_field :password_confirmation %><br>
+<%= f.password_field :password_confirmation, class: 'form-control' %><br>
