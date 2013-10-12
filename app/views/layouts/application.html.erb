@@ -14,11 +14,8 @@
   
   <div class="container">
     <nav class="navbar navbar-inverse" role="navigation">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="<%= root_path %>"><b>Game Contest Server</b></a>
-      </div>
       <ul class="nav navbar-nav">
-        <!--<li<%= if current_page?(root_path) then ' class=active' end %>><%= link_to 'Game Contest Server', root_path %></li>-->
+        <li<%= if current_page?(root_path) then ' class=active' end %>><%= link_to 'Game Contest Server', root_path, :style=>'font-size:18px' %></li>
         <li<%= if current_page?(users_path) then ' class=active' end %>><%= link_to 'Users', users_path %></li>
         <li<%= if current_page?(signup_path) then ' class=active' end %>><%= link_to 'Sign Up', signup_path %></li>
       </ul>
