@@ -11,3 +11,7 @@
  *= require_self
  *= require_tree .
  */
+
+.nav.navbar-nav > li:first-child {
+  font-size:18px;
+}
