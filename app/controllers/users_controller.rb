@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   before_action :ensure_user_logged_in, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_admin, only: [:destroy]
   
   def index
     @users = User.all
@@ -53,6 +55,16 @@ class UsersController < ApplicationController
     
     def ensure_user_logged_in
       redirect_to login_path unless logged_in?
+    end
+    
+    def ensure_correct_user
+      @user = User.find(params[:id])
+      redirect_to root_path unless current_user?(@user)
+    end
+    
+    def ensure_admin
+      flash[:danger] = "Unable to delete user [not admin]"
+      redirect_to root_path unless current_user.admin?
     end
 
 end

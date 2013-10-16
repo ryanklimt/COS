@@ -1,7 +1,7 @@
 module SessionsHelper
 
   def current_user
-    @current_user ||= User.find(cookie[:user_id]) if cookie[:user_id]
+    @current_user ||= User.find(cookies.signed[:user_id]) if cookies.signed[:user_id]
   end
   
   def current_user?(user)
