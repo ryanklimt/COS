@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :ensure_user_logged_in, only: [:edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_filter :ensure_admin, only: [:destroy]
   before_action :ensure_admin, only: [:destroy]
   
   def index
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(acceptable_params)
     if @user.save then
       flash[:success] = "Welcome to the site: #{@user.username}"
+      cookies.signed[:user_id] = @user.id
       redirect_to @user
     else
       render 'new'
@@ -54,17 +56,25 @@ class UsersController < ApplicationController
     end
     
     def ensure_user_logged_in
-      redirect_to login_path unless logged_in?
+      if !logged_in?
+        redirect_to login_path
+        flash[:warning] = "Unable [not logged in]"
+      end
     end
     
     def ensure_correct_user
       @user = User.find(params[:id])
-      redirect_to root_path unless current_user?(@user)
+      if !current_user?(@user)
+        redirect_to root_path
+        flash[:warning] = "Unable [incorrect user]"
+      end
     end
     
     def ensure_admin
-      flash[:danger] = "Unable to delete user [not admin]"
-      redirect_to root_path unless current_user.admin?
+      if !current_user.nil? && !current_user.admin?
+        redirect_to root_path
+        flash[:warning] = "Unable [not admin]"
+      end
     end
 
 end
