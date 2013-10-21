@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   before_action :ensure_user_logged_in, only: [:edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
-  before_filter :ensure_admin, only: [:destroy]
   before_action :ensure_admin, only: [:destroy]
   
   def index
@@ -57,23 +56,23 @@ class UsersController < ApplicationController
     
     def ensure_user_logged_in
       if !logged_in?
-        redirect_to login_path
         flash[:warning] = "Unable [not logged in]"
+        redirect_to login_path
       end
     end
     
     def ensure_correct_user
       @user = User.find(params[:id])
       if !current_user?(@user)
+        flash[:danger] = "Unable [incorrect user]"
         redirect_to root_path
-        flash[:warning] = "Unable [incorrect user]"
       end
     end
     
     def ensure_admin
       if !current_user.nil? && !current_user.admin?
-        redirect_to root_path
         flash[:warning] = "Unable [not admin]"
+        redirect_to root_path
       end
     end
 
