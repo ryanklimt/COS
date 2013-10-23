@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       cookies.signed[:user_id] = @user.id
-      flash[:success] = "#{@user.username} logged in."
+      flash[:success] = "#{@user.username} logged in"
       redirect_to @user
     else
       flash.now[:danger] = 'Invalid username or password'
