@@ -13,9 +13,9 @@ describe "AuthenticationPages" do
       it { should have_alert(:danger, text: 'Invalid') }
 
       describe "visiting another page" do
-	before { click_link 'Home' }
+        before { click_link 'Home' }
 
-	it { should_not have_alert(:danger) }
+        it { should_not have_alert(:danger) }
       end
     end
 
@@ -23,9 +23,9 @@ describe "AuthenticationPages" do
       let(:user) { FactoryGirl.create(:user) }
 
       before do
-	fill_in 'Username', with: user.username
-	fill_in 'Password', with: user.password
-	click_button 'Log In'
+        fill_in 'Username', with: user.username
+        fill_in 'Password', with: user.password
+        click_button 'Log In'
       end
 
       it { should have_link('Profile', href: user_path(user)) }
@@ -37,14 +37,14 @@ describe "AuthenticationPages" do
       it { should have_alert(:success) }
 
       describe "followed by logout" do
-	before { click_link 'Log Out' }
+        before { click_link 'Log Out' }
 
-	it { should have_link('Log In', href: login_path) }
-	it { should have_link('Sign Up', href: signup_path) }
-	it { should_not have_link('Log Out', href: logout_path) }
-	it { should_not have_link('Profile') }
+        it { should have_link('Log In', href: login_path) }
+        it { should have_link('Sign Up', href: signup_path) }
+        it { should_not have_link('Log Out', href: logout_path) }
+        it { should_not have_link('Profile') }
 
-	it { should have_alert(:info) }
+        it { should have_alert(:info) }
       end
     end
   end
@@ -58,16 +58,16 @@ describe "AuthorizationPages" do
   describe "non-authenticated users" do
     describe "for Users controller" do
       describe "edit action" do
-	before { visit edit_user_path(user) }
+        before { visit edit_user_path(user) }
 
-	it { should have_alert(:warning) }
-	it { should have_content('Log In') }
+        it { should have_alert(:warning) }
+        it { should have_content('Log In') }
       end
 
       describe "update action", type: :request do
-	before { patch user_path(user) }
+        before { patch user_path(user) }
 
-	it { errors_on_redirect(login_path, :warning) }
+        it { errors_on_redirect(login_path, :warning) }
       end
     end
   end
@@ -120,15 +120,21 @@ describe "AuthorizationPages" do
   end
 
   describe "authenticated admin user" do
-    describe "delete action (self)", type: :request do
-      let(:admin) { FactoryGirl.create(:admin) }
+    let(:admin) { FactoryGirl.create(:admin) }
 
+    describe "delete action (self)", type: :request do
       before do
-	login admin, avoid_capybara: true
-	delete user_path(admin)
+        login admin, avoid_capybara: true
+        delete user_path(admin)
       end
 
       it { errors_on_redirect(root_path, :danger) }
+    end
+
+    pending "edit action (other)" do
+    end
+
+    pending "update action (other)", type: :request do
     end
   end
 end
