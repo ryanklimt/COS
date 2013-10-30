@@ -57,11 +57,11 @@ describe User do
 		     foo@bar_baz.com
 		     foo@bar+baz.com]
       addresses.each do |invalid_address|
-	it "is invalid" do
-	  user.email = invalid_address
-	  expect(user).not_to be_valid
-	end
-      end
+	    it "is invalid" do
+	      user.email = invalid_address
+	      expect(user).not_to be_valid
+	    end
+     end
     end
 
     describe "properly formed addresses" do
