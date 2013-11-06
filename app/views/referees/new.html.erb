@@ -1,0 +1,21 @@
+<h1>Create a referee</h1>
+
+<%= form_for @referee do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :rules_url %>
+    <%= f.text_field :rules_url, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :players_per_game %>
+    <%= f.text_field :players_per_game, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :upload %>
+    <%= f.file_field :upload, class: 'form-control' %>
+  </div>
+  <%= form.submit 'Upload a new referee', class: 'btn btn-primary' %>
+<% end %>
