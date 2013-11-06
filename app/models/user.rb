@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  belongs_to :referees
-  belongs_to :players
-  belongs_to :contests
+  has_many :referees
+  has_many :players
+  has_many :contests
   has_secure_password
   
   validates :username, :presence => true, length: { maximum: 20 }, uniqueness: true
