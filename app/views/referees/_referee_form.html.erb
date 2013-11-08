@@ -1,6 +1,14 @@
-<h1>Create Referee</h1>
+ <% if @referee.errors.any? %>
+    <div class="alert alert-danger"> 
+    <p>There are <%= @referee.errors.count %> errors.</p>
+    </div>
+    <ul>
+      <% @referee.errors.full_messages.each do |message| %>
+      <li class="text-danger"> <%= message %> </li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= form_for @referee do |f| %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control'%>
@@ -13,6 +21,7 @@
 
   <div class="form-group">
     <%= f.label :players_per_game %>
+    <%# f.text_field :players_per_game, class: 'form-control'%>
     <%= f.select :players_per_game, 1..10, {}, class: 'form-control'%>
   </div>
 
@@ -20,6 +29,3 @@
     <%= f.label :upload %>
     <%= f.file_field :upload, class: 'form-control'%>
   </div>
-
-  <%= f.submit 'Create new referee' %>
-<%end %>

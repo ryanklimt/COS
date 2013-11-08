@@ -1,0 +1,7 @@
+<h1>Referee Information</h1>
+
+<p><%= @referee.name %> | <%= link_to "edit", edit_referee_path(@referee) %></p>
+<ul>
+  <li>Rules Url: <%= link_to 'Rules', @referee.rules_url %></li>
+  <li>Players per Game: <%= @referee.players_per_game %></li>
+</ul>
