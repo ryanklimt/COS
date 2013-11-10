@@ -18,15 +18,13 @@
         <li<%= if current_page?(root_path) then ' class=active' end %>><%= link_to 'Game Contest Server', root_path %></li>
         <li class='hidden'><%= link_to 'Home', root_path %></li>
         <li<%= if current_page?(users_path) then ' class=active' end %>><%= link_to 'Users', users_path %></li>
+        <li<%= if current_page?(referees_path) then ' class=active' end %>><%= link_to 'Referees', referees_path %></li>
         <% if logged_in? %>
           <li<%= if current_page?(current_user) then ' class=active' end %>><%= link_to 'Profile', current_user %></li>
-          <li<%= if current_page?(referees_path) then ' class=active' end %>><%= link_to 'Referees', referees_path %></li>
-          <li<%= if current_page?(new_referee_path) then ' class=active' end %>><%= link_to 'New Referee', new_referee_path %></li>
-          <li<%= if current_page?(edit_user_path(current_user)) then ' class=active' end %>><%= link_to 'Edit', edit_user_path(current_user) %></li>
-          <li class='hidden'><%= link_to 'Settings', edit_user_path(current_user) %></li>
+          <li<%= if current_page?(new_referee_path) then ' class=active' end %>><%= link_to 'Create Referee', new_referee_path %></li>
+          <li<%= if current_page?(edit_user_path(current_user)) then ' class=active' end %>><%= link_to 'Settings', edit_user_path(current_user) %></li>
           <li<%= if current_page?(logout_path) then ' class=active' end %>><%= link_to 'Log Out', logout_path, method: :delete %></li>
-        <% end %>        
-        <% if !logged_in? %>
+        <% else %>
           <li<%= if current_page?(signup_path) then ' class=active' end %>><%= link_to 'Sign Up', signup_path %></li>
           <li<%= if current_page?(login_path) then ' class=active' end %>><%= link_to 'Log In', login_path %></li>
         <% end %>

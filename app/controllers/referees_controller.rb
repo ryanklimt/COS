@@ -1,5 +1,7 @@
 class RefereesController < ApplicationController
-  before_action :ensure_user_logged_in
+  before_action :ensure_user_logged_in, only: [:create, :edit, :update]
+  before_action :ensure_admin_user, only: [:destroy]
+  
     
   def new
     @referee = current_user.referees.build
@@ -16,7 +18,7 @@ class RefereesController < ApplicationController
   end
   
   def index
-    @referees = current_user.referees.all
+    @referees = Referee.all
   end
   
   def show
@@ -44,9 +46,13 @@ class RefereesController < ApplicationController
     def acceptable_params
       params.require(:referee).permit(:name, :rules_url, :players_per_game, :upload)
     end
+    
+    def ensure_admin_user
+      redirect_to users_path unless current_user.admin?
+    end 
    
     def ensure_user_logged_in
-      redirect_to login_path, flash: { :warning => "Unable [not logged in]" } unless logged_in? 
-    end
+      redirect_to login_path, flash: { :warning => "Unable, please log in!" } unless logged_in? 
+    end   
     
 end
