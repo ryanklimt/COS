@@ -2,6 +2,9 @@ class Referee < ActiveRecord::Base
   belongs_to :user
   has_many :contests
   has_many :matches, as: :manager
+  validates :name, :presence => true
+  validates :rules_url, :presence => true
+  validates_numericality_of :players_per_game, :greater_than => 0 
   
   def upload=(uploaded_io)
     if uploaded_io.nil?

@@ -1,7 +1,6 @@
 class RefereesController < ApplicationController
   before_action :ensure_user_logged_in, only: [:create, :edit, :update]
   before_action :ensure_admin_user, only: [:destroy]
-  
     
   def new
     @referee = current_user.referees.build
