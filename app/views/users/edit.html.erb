@@ -1,6 +1,6 @@
-<h1>Edit user information</h1>
+<h1>Update your profile</h1>
 
-<%= form_for @user do |form| %>  
-  <%= render 'user_fields', f: form %>
-<%= form.submit 'Update account', class: 'btn btn-primary' %>
-<% end %>
+<%= form_for @user do |f| %>
+  <%= render 'user_form', f: f %>
+  <%= f.submit 'Update account' %>
+<%end %>

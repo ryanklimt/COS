@@ -1,7 +1,8 @@
 class RefereesController < ApplicationController
-  before_action :ensure_user_logged_in, only: [:create, :edit, :update]
-  before_action :ensure_admin_user, only: [:destroy]
-    
+  before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update]
+  before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
+  #before_action :ensure_correct_user, only: [:edit, :update]
+  
   def new
     @referee = current_user.referees.build
   end 
@@ -9,6 +10,7 @@ class RefereesController < ApplicationController
   def create
     @referee = current_user.referees.build(acceptable_params)
     if @referee.save then
+      File.new(@referee.file_location, "r")
       flash[:success] = "Referee #{@referee.name} created!"
       redirect_to @referee     
     else
@@ -39,6 +41,16 @@ class RefereesController < ApplicationController
   end
   
   def destroy
+    @referee = Referee.find(params[:id])
+    if !current_user?(@referee)
+      @referee.destroy
+      File.delete(@referee.file_location)
+      flash[:success] = "Referee destroyed."
+      redirect_to referees_path
+    else
+      flash[:danger] = "Can't delete referee."
+      redirect_to root_path
+    end 
   end
   
   private
@@ -46,12 +58,16 @@ class RefereesController < ApplicationController
       params.require(:referee).permit(:name, :rules_url, :players_per_game, :upload)
     end
     
-    def ensure_admin_user
-      redirect_to users_path unless current_user.admin?
+    def ensure_correct_user
+      redirect_to root_path, flash: { :danger => "Must be Logged in as correct user!" } unless current_user?(@referee.user_id)
     end 
    
     def ensure_user_logged_in
-      redirect_to login_path, flash: { :warning => "Unable, please log in!" } unless logged_in? 
-    end   
+     redirect_to login_path, flash: { :warning => "Unable, please log in!" } unless logged_in? 
+    end
     
+    def ensure_contest_creator 
+      redirect_to root_path, flash: { :danger => "You are not a contest creator!" } unless current_user.contest_creator?
+    end
+       
 end

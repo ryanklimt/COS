@@ -24,6 +24,7 @@
           <li<%= if current_page?(current_user) then ' class=active' end %>><%= link_to 'Profile', current_user %></li>
           <li<%= if current_page?(new_referee_path) then ' class=active' end %>><%= link_to 'New Referee', new_referee_path %></li>
           <li<%= if current_page?(new_player_path) then ' class=active' end %>><%= link_to 'New Player', new_player_path %></li>
+          <li<%= if current_page?(new_contest_path) then ' class=active' end %>><%= link_to 'New Contest', new_contest_path %></li>
           <li<%= if current_page?(edit_user_path(current_user)) then ' class=active' end %>><%= link_to 'Settings', edit_user_path(current_user) %></li>
           <li<%= if current_page?(logout_path) then ' class=active' end %>><%= link_to 'Log Out', logout_path, method: :delete %></li>
         <% else %>

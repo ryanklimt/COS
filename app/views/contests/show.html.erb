@@ -1,0 +1,12 @@
+<h1>Contest Information</h1>
+
+<p><%= @contest.name %> | <%= link_to "edit", edit_contest_path(@contest) %></p>
+<ul>
+  <li>Created: less than a minute</li>
+  <li>Contest Type: <%= @contest.contest_type %></li>
+  <li>Start Time: <%= @contest.start %></li>
+  <li>Deadline: <%= @contest.deadline %></li>
+  <li>Description: <%= @contest.description %></li>
+  <li>Referee: <%= @contest.referee.name %></li>
+</ul>
+  
