@@ -5,7 +5,7 @@ class RefereesController < ApplicationController
   
   def new
     @referee = current_user.referees.build
-  end 
+  end
   
   def create
     @referee = current_user.referees.build(acceptable_params)
@@ -66,7 +66,7 @@ class RefereesController < ApplicationController
      redirect_to login_path, flash: { :warning => "Unable, please log in!" } unless logged_in? 
     end
     
-    def ensure_contest_creator 
+    def ensure_contest_creator
       redirect_to root_path, flash: { :danger => "You are not a contest creator!" } unless current_user.contest_creator?
     end
        
