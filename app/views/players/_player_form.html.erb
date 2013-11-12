@@ -25,6 +25,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :contest_id, "Referee" %>
+    <%= f.label :contest_id, "Contest" %>
     <%= f.collection_select(:contest_id, Contest.all, :id, :name, class: 'form-control') %>
   </div>

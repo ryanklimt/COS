@@ -1,16 +1,15 @@
 class RefereesController < ApplicationController
   before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update]
   before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
-  #before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
   
   def new
     @referee = current_user.referees.build
-  end
+  end 
   
   def create
     @referee = current_user.referees.build(acceptable_params)
     if @referee.save then
-      File.new(@referee.file_location, "r")
       flash[:success] = "Referee #{@referee.name} created!"
       redirect_to @referee     
     else
@@ -27,7 +26,6 @@ class RefereesController < ApplicationController
   end
   
   def update
-    @referee = Referee.find(params[:id])
     if @referee.update_attributes(acceptable_params)
       flash[:success] = "Referee #{@referee.name} updated successfully!"
       redirect_to @referee
@@ -37,14 +35,12 @@ class RefereesController < ApplicationController
   end
   
   def edit
-    @referee = Referee.find(params[:id])
   end
   
   def destroy
     @referee = Referee.find(params[:id])
-    if !current_user?(@referee)
+    if current_user?(@referee.user) #|| current_user.admin?
       @referee.destroy
-      File.delete(@referee.file_location)
       flash[:success] = "Referee destroyed."
       redirect_to referees_path
     else
@@ -59,14 +55,15 @@ class RefereesController < ApplicationController
     end
     
     def ensure_correct_user
-      redirect_to root_path, flash: { :danger => "Must be Logged in as correct user!" } unless current_user?(@referee.user_id)
+      @referee = Referee.find(params[:id])
+      redirect_to root_path, flash: { :danger => "Must be Logged in as correct user!" } unless current_user?(@referee.user)
     end 
    
     def ensure_user_logged_in
      redirect_to login_path, flash: { :warning => "Unable, please log in!" } unless logged_in? 
     end
     
-    def ensure_contest_creator
+    def ensure_contest_creator 
       redirect_to root_path, flash: { :danger => "You are not a contest creator!" } unless current_user.contest_creator?
     end
        

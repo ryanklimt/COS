@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     end
     
     def ensure_admin_user
-     redirect_to users_path unless current_user.admin?
+      redirect_to root_path, flash: { :danger => "Must be admin!" } unless current_user.admin?
     end 
    
     def ensure_user_logged_in

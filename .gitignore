@@ -9,6 +9,8 @@
 /spec/spec_helper.rb
 
 # Ignore all uploaded data files
+/code/managers/*
+/code/referees/*
 /code
 
 # Ignore bundler config.
