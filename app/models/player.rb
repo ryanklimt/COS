@@ -15,9 +15,9 @@ class Player < ActiveRecord::Base
       #problem no file
     else
       time_no_spaces = Time.now.to_s.gsub(/\s/, '_')
-      random_letters = ""
-      (9).times { random_letters += (65 + rand(26)).chr }
-      file_location = Rails.root.join('code', 'players', Rails.env, Digest::SHA1.hexdigest(time_no_spaces) + random_letters).to_s
+      salt = ""
+      (9).times { salt += (65 + rand(26)).chr }
+      file_location = Rails.root.join('code', 'players', Rails.env, Digest::SHA1.hexdigest(time_no_spaces + salt)).to_s
       IO::copy_stream(uploaded_file, file_location)
     end
     self.file_location = file_location
