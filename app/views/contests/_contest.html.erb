@@ -1,4 +1,4 @@
-<li><%= link_to contest.name, contest_path(contest) %> |
-     <%= link_to "edit", edit_contest_path(contest) %>
-      <% if current_user?(contest.user)%>
+<li><%= link_to contest.name, contest_path(contest) %>
+  <% if current_user?(contest.user)%>
+  | <%= link_to "edit", edit_contest_path(contest) %>
        | <%= link_to "delete", contest_path(contest), method: :delete, data: { confirm: "Are you sure you want to delete #{contest.name}?" } %><% end %></li>
