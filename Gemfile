@@ -9,6 +9,7 @@ gem 'sqlite3'
 group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'timecop'
 end
 
 group :development, :test do
@@ -17,7 +18,7 @@ end
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-gem 'validates_timeliness', '~> 3.0'
+gem 'validates_timeliness', github: 'softace/validates_timeliness', branch: 'support_for_rails4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

@@ -25,17 +25,17 @@ describe Contest do
   end
 
   describe "deadline in past" do
-    before { contest.deadline = Time.current - 1.day }
+    before { contest.deadline = 1.day.ago }
     it { should_not be_valid }
   end
 
   describe "deadline now" do
-    before { contest.deadline = Time.current + 5.seconds }
+    before { contest.deadline = Time.current }
     it { should be_valid }
   end
 
   describe "deadline in future" do
-    before { contest.deadline = Time.current + 1.day }
+    before { contest.deadline = 1.day.from_now }
     it { should be_valid }
   end
 
@@ -62,17 +62,17 @@ describe Contest do
   end
 
   describe "start in past" do
-    before { contest.start = Time.current - 1.day }
+    before { contest.start = 1.day.ago }
     it { should_not be_valid }
   end
 
   describe "start now" do
-    before { contest.deadline = contest.start = Time.current + 5.seconds }
+    before { contest.deadline = contest.start = Time.current }
     it { should be_valid }
   end
 
   describe "start in future" do
-    before { contest.start = Time.current + 1.day }
+    before { contest.start = 1.day.from_now }
     it { should be_valid }
   end
 

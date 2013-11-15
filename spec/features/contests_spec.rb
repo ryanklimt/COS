@@ -5,8 +5,7 @@ include ActionView::Helpers::DateHelper
 describe "ContestsPages" do
   let (:creator) { FactoryGirl.create(:contest_creator) }
   let!(:referee) { FactoryGirl.create(:referee) }
-  # give slack for time to run all the tests in this file
-  let (:now) { Time.current + 1.minute }
+  let (:now) { Time.current }
   let (:name) { 'Test Contest' }
   let (:description) { 'Contest description' }
   let (:type) { 'Testing' }
@@ -44,8 +43,8 @@ describe "ContestsPages" do
       illegal_dates.each do |date|
 	describe "illegal date (#{date.to_s})" do
 	  before do
-	    select_illegal_datetime('Deadline', date)
-	    select_datetime(now, 'Start')
+	    select_illegal_datetime('Start', date)
+	    select_datetime(now, 'Deadline')
 	    fill_in 'Description', with: description
 	    fill_in 'Name', with: name
 	    fill_in 'Contest Type', with: type
