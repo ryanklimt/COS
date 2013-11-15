@@ -5,7 +5,8 @@
   <li>Contest Creator: <%= link_to @contest.user.username, user_path(@contest.user) %></li>
   <li>Contest Type: <%= @contest.contest_type %></li>
   <li>Start Time: <%= distance_of_time_in_words_to_now(@contest.start) %></li>
-  <li>Deadline: <%= @contest.deadline %></li>
+  <li>Deadline: <%= distance_of_time_in_words_to_now(@contest.deadline) %></li>
   <li>Description: <%= @contest.description %></li>
   <li>Referee: <%= link_to @contest.referee.name, referee_path(@contest.referee) %></li>
 </ul>
+  

@@ -17,6 +17,8 @@ end
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+gem 'validates_timeliness', '~> 3.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
