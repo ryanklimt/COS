@@ -4,10 +4,9 @@ class Referee < ActiveRecord::Base
   has_many :matches, as: :manager
   
   validates :name, presence: true, uniqueness: true
-  VALID_URL_REGEX = /https?:\/\/[\S]+/i
-  validates :rules_url, presence: true, format: { with: VALID_URL_REGEX }
+  validates :rules_url, presence: true, format: { with: /https?:\/\/[\S]+/i }
   validates :players_per_game, presence: true, :numericality => { :greater_than_or_equal_to => 1, :less_than_or_equal_to => 10, only_integer: true}
-  validates :file_location, presence: true 
+  validates :file_location, presence: true, format: { with: /referee/ }
   
   def upload=(uploaded_file)
     if uploaded_file.nil?

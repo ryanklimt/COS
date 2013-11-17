@@ -6,9 +6,9 @@ class Player < ActiveRecord::Base
   validates :user,  presence: true
   validates :contest, presence: true
   
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :description, presence: true
-  validates :file_location, presence: true 
+  validates :file_location, presence: true, format: { with: /player/ }
   
   def upload=(uploaded_file)
     if uploaded_file.nil?
@@ -28,4 +28,5 @@ class Player < ActiveRecord::Base
   def delete_file
     File.delete(self.file_location)
   end
+  
 end
