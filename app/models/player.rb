@@ -8,7 +8,9 @@ class Player < ActiveRecord::Base
   
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
-  validates :file_location, presence: true, format: { with: /player/ }
+  validates :file_location, presence: true
+  
+  validate :check_file_location
   
   def upload=(uploaded_file)
     if uploaded_file.nil?
@@ -27,6 +29,12 @@ class Player < ActiveRecord::Base
   
   def delete_file
     File.delete(self.file_location)
+  end
+  
+  def check_file_location
+    if(self.file_location && !File.exists?(self.file_location))
+      errors.add(:file_location, "Invalid file location")
+    end
   end
   
 end
