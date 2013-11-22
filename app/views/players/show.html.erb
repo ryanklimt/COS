@@ -5,5 +5,7 @@
 <ul>
   <li>Creator: <%= link_to @player.user.username, user_path(@player.user) %></li>
   <li>Description: <%= @player.description %></li>
-  <li>Contest: <%= link_to @player.contest.name, @player.contest %></li>
+  <li>Contest: <%= link_to @player.contest.name, contest_path(@player.contest) %></li>
+  <li>Player is available for matches: <%= @player.playable %></li>
+  <li>Player is downloadable: <%= @player.downloadable %></li>
 </ul>

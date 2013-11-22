@@ -8,6 +8,10 @@
   <li>Deadline: <%= distance_of_time_in_words_to_now(@contest.deadline) %></li>
   <li>Description: <%= @contest.description %></li>
   <li>Referee: <%= link_to @contest.referee.name, referee_path(@contest.referee) %></li>
+  <li>Players: <ul><% @contest.players.each do |f| %>
+    <li><%= link_to f.name, contest_players_path(f) %></li>
+    <% end %></ul>
+  </li>
 </ul>
 
 <p><%= link_to 'New Player', new_contest_player_path(@contest) %></p>
