@@ -3,12 +3,16 @@ class PlayersController < ApplicationController
   #before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
   
+  # /contests/:contest_id/players/new
   def new
-    @player = current_user.players.build
+    contest = Contest.find(params[:contest_id])
+    @player = contest.players.build
   end 
   
+  # /contests/:contest_id/players
   def create
-    @player = current_user.players.build(acceptable_params)
+    contest = Contest.find(params[:contest_id])
+    @player = contest.players.build(acceptable_params)
     if @player.save then
       flash[:success] = "Referee #{@player.name} created!"
       redirect_to @player     

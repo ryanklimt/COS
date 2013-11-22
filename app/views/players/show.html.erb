@@ -1,8 +1,9 @@
 <h1>Player Information</h1>
 
+<p>Player is available for matches</p>
 <p>Name: <%= @player.name %> | <%= link_to "edit", edit_player_path(@player) %></p>
 <ul>
   <li>Creator: <%= link_to @player.user.username, user_path(@player.user) %></li>
   <li>Description: <%= @player.description %></li>
-  <li>Contest: <% @player.contest.name %> </li>
+  <li>Contest: <% @player.contest.name %></li>
 </ul>
