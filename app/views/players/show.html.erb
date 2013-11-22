@@ -5,5 +5,5 @@
 <ul>
   <li>Creator: <%= link_to @player.user.username, user_path(@player.user) %></li>
   <li>Description: <%= @player.description %></li>
-  <li>Contest: <% @player.contest.name %></li>
+  <li>Contest: <%= link_to @player.contest.name, @player.contest %></li>
 </ul>

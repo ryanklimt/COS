@@ -46,7 +46,7 @@ class PlayersController < ApplicationController
     if current_user?(@player.user) #|| current_user.admin?
       @player.destroy
       flash[:success] = "Player destroyed."
-      redirect_to referees_path
+      redirect_to contest_players_path(params[:id])
     else
       flash[:danger] = "Can't delete player."
       redirect_to root_path

@@ -8,7 +8,6 @@ GameContestServer::Application.routes.draw do
   resources :contests do
     resources :players, shallow: true
   end
-  resources :players
   
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

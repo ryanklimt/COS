@@ -7,8 +7,9 @@ class Player < ActiveRecord::Base
   
   validates :user,  presence: true
   validates :contest, presence: true
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :description, presence: true
+  validates_uniqueness_of :name, :scope => :contest
   
   include Uploadable
   
