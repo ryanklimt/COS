@@ -7,6 +7,7 @@ GameContestServer::Application.routes.draw do
   resources :referees
   resources :contests do
     resources :players, shallow: true
+    resources :matches, shallow: true, only: [:index, :show]
   end
   
   get 'signup', to: 'users#new', as: 'signup'

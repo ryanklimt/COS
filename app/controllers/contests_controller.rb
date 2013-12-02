@@ -12,7 +12,7 @@ class ContestsController < ApplicationController
     @contest = current_user.contests.build(acceptable_params)
     if @contest.save then
       flash[:success] = "Contest #{@contest.name} created!"
-      redirect_to @contest     
+      redirect_to @contest
     else
       render 'new'
     end

@@ -4,8 +4,11 @@ class UsersController < ApplicationController
   before_action :ensure_admin_user, only: [:destroy]
   before_action :ensure_not_logged_in, only: [:new, :create]
   
+  respond_to :html, :json, :xml
+  
   def new
     @user = User.new
+    respond_with(@user)
   end
   
   def create
@@ -13,10 +16,8 @@ class UsersController < ApplicationController
     if @user.save then
       log_in(@user)
       flash[:success] = "Welcome to the site: #{@user.username}"
-      redirect_to @user     
-    else
-      render 'new'
     end
+    respond_with(@user)
   end
     
   def edit
@@ -26,31 +27,25 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Acccount #{@user.username} updated successfully!"
-      redirect_to @user
-    else
-      render 'edit'
     end
+    respond_with(@user)
   end
     
   def index
     @users = User.all
+    respond_with(@users)
   end
     
   def show
     @user = User.find(params[:id])
+    respond_with(@user)
   end
     
   def destroy
-    @user = User.find(params[:id])
-    if !current_user?(@user)
-      @user.destroy
-      flash[:success] = "User destroyed."
-      redirect_to users_path
-    else
-      flash[:danger] = "Can't delete yourself."
-      redirect_to root_path
-    end 
-  end 
+    @user.destroy
+    flash[:success] = "User destroyed."      
+    respond_with(@user)
+  end
     
   private
     def user_params
@@ -58,8 +53,11 @@ class UsersController < ApplicationController
     end
     
     def ensure_admin_user
-      redirect_to root_path, flash: { :danger => "Must be admin!" } unless current_user.admin?
-    end 
+      @user = User.find(params[:id])
+      if !current_user.admin? || current_user?(@user)
+        redirect_to root_path, flash: { :danger => "Must be admin!" }
+      end
+    end
    
     def ensure_user_logged_in
      redirect_to login_path, flash: { :warning => "Unable, please log in!" } unless logged_in? 
