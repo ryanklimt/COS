@@ -4,10 +4,9 @@
   <p>Match Manager Referee Name <%= @match.manager.referee.name %></p>
   <p>Match Manager Referee Name <%= @match.manager.referee.players_per_game %></p>
   <p>Completion: <%= distance_of_time_in_words_to_now(@match.completion) %></p>
-
 <h2>Descending</h2>
 <ol>
   <% @match.player_matches.order('score DESC').each do |match| %>
-    <li><%= link_to match.player.name, player_path(match.player) %> - <%= match.score %> </li>
+    <li><%= link_to match.player.name, player_path(match.player) %> - <%= match.score %></li>
   <% end %>
 </ol>

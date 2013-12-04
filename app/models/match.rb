@@ -32,7 +32,7 @@ class Match < ActiveRecord::Base
   def player_count
     if self.players && self.manager
       if self.players.count != self.manager.referee.players_per_game
-        errors.add(:player_matches,"wrong number of players!")
+        errors.add(:player_matches,"Wrong number of players!")
       end
     end
   end
