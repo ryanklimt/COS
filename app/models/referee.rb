@@ -10,4 +10,8 @@ class Referee < ActiveRecord::Base
   
   include Uploadable
   
+  def referee
+    self
+  end
+  
 end

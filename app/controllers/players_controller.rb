@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   before_action :ensure_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update]
   
-  # /contests/:contest_id/players/new
+  # /matches/new
   def new
     contest = Contest.find(params[:contest_id])
     @player = contest.players.build

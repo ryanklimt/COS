@@ -5,9 +5,9 @@
   <li>Chat Url: <%= @user.chat_url %></li>
 </ul>
 
-<% if  @user.contest_creator? %>
+<% if @user.contest_creator? %>
 <h2>Referees</h2>
-<h4><%= @user.referees.length%> referees</h4>
+<h4><%= @user.referees.length %> referees</h4>
 <ul>
   <%= render partial: "user_referees", collection: @user.referees, as: :referee%>
 </ul>
@@ -15,7 +15,7 @@
 <% end %>
 
 <h2>Players</h2>
-<h4><%=@user.players.length%> players</h4>
+<h4><%=@user.players.length %> players</h4>
 <ul>
   <%= render partial: "user_players", collection: @user.players, as: :player%>
 </ul>

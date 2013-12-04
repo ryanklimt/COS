@@ -3,7 +3,6 @@ class ContestsController < ApplicationController
   before_action :ensure_contest_creator, only: [:new, :create, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
   
-  
   def new
     @contest = current_user.contests.build
   end 

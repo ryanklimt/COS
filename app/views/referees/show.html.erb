@@ -5,8 +5,11 @@
   <li>Creator: <%= @referee.user.username %></li>
   <li>Rules Url: <%= link_to 'Rules', @referee.rules_url %></li>
   <li>Players per Game: <%= @referee.players_per_game %></li>
-  <li>Contests: <ul><% @referee.contests.each do |f| %>
-    <li><%= link_to f.name, contest_path(f) %></li>
-    <% end %></ul>
+  <li>Contests: 
+    <ul>
+      <% @referee.contests.each do |f| %>
+        <li><%= link_to f.name, contest_path(f) %></li>
+      <% end %>
+    </ul>
   </li>
 </ul>

@@ -1,13 +1,23 @@
 <h1>Player Information</h1>
 
-<p>Player is available for matches</p>
 <p>Name: <%= @player.name %> | <%= link_to "edit", edit_player_path(@player) %></p>
+
 <ul>
   <li>Creator: <%= link_to @player.user.username, user_path(@player.user) %></li>
-  <li>Description: <%= @player.description %></li>
-  <li>Contest: <%= link_to @player.contest.name, contest_path(@player.contest) %></li>
   <li>Player is available for matches: <%= @player.playable %></li>
   <li>Player is downloadable: <%= @player.downloadable %></li>
+  <li>Description: <%= @player.description %></li>
+  <li>Contest: <%= link_to @player.contest.name, contest_path(@player.contest) %></li>
 </ul>
 
-<h2>Matches</h2>
+<h2><%= "Match".pluralize(@player.contest.matches.count) %></h2>
+
+<% @losses = 0 %>
+<% @wins = 0 %>
+<% @player.player_matches.each do |match| %>
+    <% @wins += 1 if match.result == "Win" %>
+    <% @losses += 1 if match.result == "Loss" %>
+    <li><%=match.result%> - <%=link_to match.match_id, match_path(match.match) %></li>
+<% end %>
+<p>Record: <%= @wins %>-<%= @losses %></p>
+
